@@ -28,7 +28,7 @@ def load_cifar10(datadir):
 	y_train = [1]
 
 
-	x_train = x_train.reshape(1,1,32,32)
+	x_train = x_train.reshape(len(x_train)/32,1,32,32)
         x_test = x_train
 	y_test = [1]
 
@@ -40,10 +40,9 @@ def load_cifar10(datadir):
 	y_train = np.array(y_train)
 	y_test = np.array(y_test)
 
-        print(x_train)
-        print(x_test)
         print(y_train)
-        print(y_test)
+        y_train = y_train.astype(np.int32)
+        y_test = y_test.astype(np.int32)
         print(len(x_train))
 	train = td.TupleDataset(x_train, y_train)
 	test = td.TupleDataset(x_test, y_test)
@@ -58,8 +57,8 @@ class Cifar10Model(chainer.Chain):
 			conv4 = F.Convolution2D(32, 32, 1, pad=1),
 			conv5 = F.Convolution2D(32, 32, 1, pad=1),
 			conv6 = F.Convolution2D(32, 32, 1, pad=1),
-			l1 = L.Linear(2048, 2048),
-			l2 = L.Linear(512,10))
+			l1 = L.Linear(2048, 512),
+			l2 = L.Linear(512,1))
 
 	def __call__(self, x, train=True):
 		h = F.relu(self.conv1(x))
