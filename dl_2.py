@@ -51,13 +51,13 @@ def load_cifar10(datadir):
 class Cifar10Model(chainer.Chain):
 	def __init__(self):
 		super(Cifar10Model,self).__init__(
-			conv1 = F.Convolution2D(1, 32, 1, pad=1),
-			conv2 = F.Convolution2D(32, 32, 1, pad=1),
-			conv3 = F.Convolution2D(32, 32, 1, pad=1),
-			conv4 = F.Convolution2D(32, 32, 1, pad=1),
-			conv5 = F.Convolution2D(32, 32, 1, pad=1),
-			conv6 = F.Convolution2D(32, 32, 1, pad=1),
-			l1 = L.Linear(2048, 512),
+			conv1 = F.Convolution2D(1, 32, 3, pad=1),
+			conv2 = F.Convolution2D(32, 32, 3, pad=1),
+			conv3 = F.Convolution2D(32, 32, 3, pad=1),
+			conv4 = F.Convolution2D(32, 32, 3, pad=1),
+			conv5 = F.Convolution2D(32, 32, 3, pad=1),
+			conv6 = F.Convolution2D(32, 32, 3, pad=1),
+			l1 = L.Linear(512, 512),
 			l2 = L.Linear(512,1))
 
 	def __call__(self, x, train=True):
