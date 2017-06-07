@@ -59,7 +59,7 @@ class Cifar10Model(chainer.Chain):
 			conv6 = F.Convolution2D(32, 32, 3, pad=1),
 			l1 = L.Linear(512, 512),
 			l2 = L.Linear(512,1))
-
+#(input_channel_size, output_channel_size, filter_size, pad or stride)
 	def __call__(self, x, train=True):
 		h = F.relu(self.conv1(x))
 		h = F.max_pooling_2d(F.relu(self.conv2(h)), 2)
